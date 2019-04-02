@@ -3,14 +3,41 @@
 <script src="jquery-3.3.1.min.js"></script>
 <script src="clock.js"></script>
 </head>
-<body onload="draw(120);"><p>
-<img src="ClockExample.png" align=left>CLOCK EXAMPLE<br>
+<body><p>
+<!--<img src="ClockExample.png" align=left>CLOCK EXAMPLE<br>
+Uncomment the above line for an example of what I want it to look like-->
 <br clear=left>
-stay hydrated<br>
-20-20-20<br>
-stretch<br>
-Chat<br>
-OW W-L-D<br>
-<canvas id="hydrated" width="200" height="200" style="background-color:#AAA"></canvas>
-<script>draw_clock("hydrated", "#55F");</script>
+
+<canvas id="hydrated" width="200" height="200" style="background-color:#BBA"></canvas>
+<!--make the canvas(will be blank at first), then fill it in. #BBA is so I can see where the canvas limits are-->
+<canvas id="eyestrain" width="200" height="200" style="background-color:#BAB"></canvas>
+<canvas id="stretch" width="200" height="200" style="background-color:#ABB"></canvas>
+<script>
+	var hyd_max_mins = 5;
+	var hyd_cur_ms = mins_to_ms(hyd_max_mins);//initally the arrow will be full
+	var eye_max_mins = 20;
+	var eye_cur_ms = mins_to_ms(eye_max_mins);//initally the arrow will be full
+	var str_max_mins = 60;
+	var str_cur_ms = mins_to_ms(str_max_mins);//initally the arrow will be full
+	function draw() {
+	
+	draw_clock("hydrated", "#55F");//draw the canvas first, the 55F refers to it being a blue line in it.
+	canvas_label("hydrated", "Hydration Reminder");//add the text label to the canvas
+	draw_arrow("hydrated", hyd_cur_ms, mins_to_ms(hyd_max_mins));//finally draw the arrow
+	
+	draw_clock("eyestrain", "#5F5");//draw the canvas first, the 55F refers to it being a blue line in it.
+	canvas_label("eyestrain", "Eyerest Reminder");//add the text label to the canvas
+	draw_arrow("eyestrain", eye_cur_ms, mins_to_ms(eye_max_mins));//finally draw the arrow
+	
+	draw_clock("stretch", "#F55");//draw the canvas first, the 55F refers to it being a blue line in it.
+	canvas_label("stretch", "Take a break");//add the text label to the canvas
+	draw_arrow("stretch", str_cur_ms, mins_to_ms(str_max_mins));//finally draw the arrow
+	
+	if(hyd_cur_ms>=1000){ hyd_cur_ms = hyd_cur_ms -1000; } else {}
+	if(eye_cur_ms>=1000){ eye_cur_ms = eye_cur_ms -1000; } else {}
+	if(str_cur_ms>=1000){ str_cur_ms = str_cur_ms -1000; } else {}
+	}
+	draw();
+	setInterval(draw,1000);
+</script>
 </p></body></html>
